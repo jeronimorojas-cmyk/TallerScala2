@@ -159,3 +159,30 @@ val gcuadratica_5 = (x: Double) => x * x
 val pruebaDiv5 = derivadaDiv(fcuadratica_5, gcuadratica_5)(3.0) // Esperado: 0.0
 
 
+// 6. CASOS DE PRUEBA ESPECIALES (GENERADOS CON IA)
+// Caso Función no polinómica (Seno en x = 0.0) ---
+// f(x) = sin(x) => f'(0) = cos(0) = 1.0
+val fSeno = (x: Double) => Math.sin(x)
+val pruebaEspecial1 = derivada(fSeno)(0.0)
+// Salida esperada: ~ 0.9999966666666667 (Error de truncamiento de 5 puntos)
+
+// Caso Regla del producto con Seno y Coseno en x = 0.0 ---
+// (sin(x) * cos(x))' = cos^2(x) - sin^2(x) => En x = 0.0 da 1.0 - 0.0 = 1.0
+val fCos = (x: Double) => Math.cos(x)
+val pruebaEspecial2 = derivadaMult(fSeno, fCos)(0.0)
+// Salida esperada: ~ 0.9999966666666667
+
+// Caso División entre cero con numerador no nulo (k/0) ---
+// (1 / x)' en x = 0.0 => Produce -1 / (0^2)
+val fUno = (x: Double) => 1.0
+val fIdentica = (x: Double) => x
+val pruebaEspecial3 = derivadaDiv(fUno, fIdentica)(0.0)
+// Salida esperada: -Infinity
+
+// Caso Indeterminación 0/0 en la división (g(0) = 0) ---
+// (x / x)' en x = 0.0 => Produce 0/0
+val fIdentica1 = (x: Double) => x
+val pruebaEspecial4 = derivadaDiv(fIdentica1, fIdentica1)(0.0)
+// Salida esperada: NaN (Not a Number)
+
+
