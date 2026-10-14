@@ -10,9 +10,6 @@ val h1= derivadaDiv(f,g)
 val h2= derivadaDiv(g,f)
 
 
-h1(2.0)
-h2(2.0)
-
 // CASOS DE PRUEBA PARA derivada
 val fLineal = (x: Double) => 6.0 * x - 2.0
 //1
@@ -131,16 +128,21 @@ val pruebaMult5 = derivadaMult(fcuadratica5, gconstante5)(6.0) // Esperado: 0.0
 
 // CASOS DE PRUEBA PARA derivadaDiv
 
-// División de cuadrática entre lineal (ejemplo del taller)
+// División de constante entre cuadrática
+val fConstante1 = (x: Double) => 6.0
+val gCuadratica1 = (x: Double) => x * x
 //1
-val pruebaDiv1 = derivadaDiv(f, g)(2.0) // Esperado: ~ -0.25
+val pruebaDiv1 = derivadaDiv(fConstante1, gCuadratica1)(2.0)
+// Esperado: ~ -1.5
 
-
-// Inversa de la prueba 1
+// División de una función lineal entre una cuadrática
+val fLineal2 = (x: Double) => x + 1.0
+val gCuadratica2 = (x: Double) => x * x
 //2
-val pruebaDiv2 = derivadaDiv(g, f)(2.0) // Esperado: ~ 1.0
+val pruebaDiv2 = derivadaDiv(fLineal2, gCuadratica2)(2.0)
+// Esperado: ~ -0.5
 
-// Caso 3: División de constante entre lineal
+// División de constante entre lineal
 val constante3 = (x: Double) => 4.0
 val glineal3 = (x: Double) => x
 //3
@@ -152,7 +154,7 @@ val gcuadratica_4 = (x: Double) => x * x
 //4
 val pruebaDiv4 = derivadaDiv(fcubica4, gcuadratica_4)(5.0) // Esperado: ~ 2.0
 
-// Caso 5: División de funciones idénticas
+// División de funciones idénticas
 val fcuadratica_5 = (x: Double) => x * x
 val gcuadratica_5 = (x: Double) => x * x
 //5
